@@ -1,0 +1,37 @@
+version: "3"
+services:
+  apserver:
+    build: "./apserver"
+    container_name: "practice-rust-dev"
+    tty: true
+    ports:
+      - "8080:8080"
+  webserver:
+    build: ./webserver
+    container_name: "webserver"
+    ports:
+      - "3000:3000"
+    tty: true
+  loadbalancer:
+    build: ./loadbalancer
+    ports:
+      - "80:80"
+    volumes:
+      - ./loadbalancer:/etc/nginx/conf.d
+  db:
+    build: ./dbserver
+    container_name: mysql_host
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todoproject
+      MYSQL_USER: rustrust
+      MYSQL_PASSWORD: rustrust
+      TZ: 'Asia/Tokyo'
+    command: mysqld
+    volumes:
+      - ./dbserver/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./dbserver/init/:/docker-entrypoint-initdb.d/
+      - ./dbserver/conf/my.cnf:/etc/my.cnf
+    ports:
+      - 3306:3306
