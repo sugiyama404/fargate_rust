@@ -1,6 +1,5 @@
 variable "http_ports" {}
 variable "https_ports" {}
-variable "ssh_ports" {}
 variable "web_ports" {}
 variable "api_ports" {}
 variable "db_ports" {}

@@ -41,16 +41,16 @@ module "network" {
 
 # elb
 module "elb" {
-  source       = "./modules/elb"
-  app_name     = var.app_name
-  web_app_name = var.web_app_name
-  api_app_name = var.api_app_name
-  main_vpc_id  = module.network.main_vpc_id
-  #apserver_sg_id = module.network.apserver_sg_id
+  source        = "./modules/elb"
+  app_name      = var.app_name
+  web_app_name  = var.web_app_name
+  api_app_name  = var.api_app_name
+  main_vpc_id   = module.network.main_vpc_id
   subnet_p1a_id = module.network.subnet_public_1a_id
-  #webserver_sg_id = module.network.webserver_sg_id
   subnet_p1c_id = module.network.subnet_public_1c_id
   alb_sg_id     = module.network.alb_sg_id
+  #webserver_sg_id = module.network.webserver_sg_id
+  #apserver_sg_id = module.network.apserver_sg_id
 }
 
 # ECR
@@ -82,23 +82,24 @@ module "rds" {
 
 # ECS
 module "ecs" {
-  source           = "./modules/ecs"
-  app_name         = var.app_name
-  web_app_name     = var.web_app_name
-  api_app_name     = var.api_app_name
-  apserver_sg_id   = module.network.apserver_sg_id
-  subnet_p1a_id    = module.network.subnet_public_1a_id
-  webserver_sg_id  = module.network.webserver_sg_id
-  subnet_p1c_id    = module.network.subnet_public_1c_id
-  aws_iam_role     = module.iam.aws_iam_role
-  db_endpoint      = module.rds.db_endpoint
-  db_instance_name = module.rds.db_instance_name
-  db_name          = module.rds.db_name
-  db_username      = module.rds.db_username
-  db_password      = module.rds.db_password
-  #api_repository_url = module.ecr.api_repository_url
-  #web_repository_url = module.ecr.web_repository_url
+  source                   = "./modules/ecs"
+  app_name                 = var.app_name
+  web_app_name             = var.web_app_name
+  api_app_name             = var.api_app_name
+  apserver_sg_id           = module.network.apserver_sg_id
+  subnet_p1a_id            = module.network.subnet_public_1a_id
+  webserver_sg_id          = module.network.webserver_sg_id
+  subnet_p1c_id            = module.network.subnet_public_1c_id
+  aws_iam_role             = module.iam.aws_iam_role
+  db_endpoint              = module.rds.db_endpoint
+  db_instance_name         = module.rds.db_instance_name
+  db_name                  = module.rds.db_name
+  db_username              = module.rds.db_username
+  db_password              = module.rds.db_password
   api_alb_target_group_arn = module.elb.api_alb_target_group_arn
   web_alb_target_group_arn = module.elb.web_alb_target_group_arn
-
+  web_ports                = var.web_ports
+  api_ports                = var.api_ports
+  #lb_listener_rule_api     = module.elb.lb_listener_rule_api
+  #lb_listener_rule_web     = module.elb.lb_listener_rule_web
 }
