@@ -34,3 +34,92 @@ variable "region" {
   default     = "ap-northeast-1"
 }
 
+variable "http_ports" {
+  type = list(object({
+    internal = number
+    external = number
+    protocol = string
+  }))
+  default = [
+    {
+      internal = 80
+      external = 80
+      protocol = "tcp"
+    }
+  ]
+}
+
+variable "https_ports" {
+  type = list(object({
+    internal = number
+    external = number
+    protocol = string
+  }))
+  default = [
+    {
+      internal = 443
+      external = 443
+      protocol = "tcp"
+    }
+  ]
+}
+
+variable "ssh_ports" {
+  type = list(object({
+    internal = number
+    external = number
+    protocol = string
+  }))
+  default = [
+    {
+      internal = 22
+      external = 22
+      protocol = "tcp"
+    }
+  ]
+}
+
+variable "web_ports" {
+  type = list(object({
+    internal = number
+    external = number
+    protocol = string
+  }))
+  default = [
+    {
+      internal = 3000
+      external = 3000
+      protocol = "tcp"
+    }
+  ]
+}
+
+variable "api_ports" {
+  type = list(object({
+    internal = number
+    external = number
+    protocol = string
+  }))
+  default = [
+    {
+      internal = 8080
+      external = 8080
+      protocol = "tcp"
+    }
+  ]
+}
+
+variable "db_ports" {
+  type = list(object({
+    internal = number
+    external = number
+    protocol = string
+  }))
+  default = [
+    {
+      internal = 3306
+      external = 3306
+      protocol = "tcp"
+    }
+  ]
+}

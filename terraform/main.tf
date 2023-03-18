@@ -32,6 +32,12 @@ module "network" {
   app_name     = var.app_name
   web_app_name = var.web_app_name
   api_app_name = var.api_app_name
+  http_ports   = var.http_ports
+  https_ports  = var.https_ports
+  ssh_ports    = var.ssh_ports
+  web_ports    = var.web_ports
+  api_ports    = var.api_ports
+  db_ports     = var.db_portsdb_ports
 }
 
 # elb
