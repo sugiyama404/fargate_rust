@@ -8,6 +8,9 @@ variable "db_username" {}
 variable "db_password" {}
 #variable "api_repository_url" {}
 #variable "web_repository_url" {}
+variable "web_ports" {}
+variable "api_ports" {}
+
 data "aws_caller_identity" "self" {}
 
 # TaskDefinition for Fargate api
@@ -28,8 +31,8 @@ resource "aws_ecs_task_definition" "api-definition" {
       essential = true
       portMappings = [
         {
-          containerPort = 8080
-          hostPort      = 8080
+          hostPort      = var.api_ports[0].internal
+          containerPort = var.api_ports[0].external
         }
       ]
       environment = [
@@ -85,8 +88,8 @@ resource "aws_ecs_task_definition" "web-definition" {
       essential = true
       portMappings = [
         {
-          containerPort = 3000
-          hostPort      = 3000
+          containerPort = var.web_ports[0].internal
+          hostPort      = var.web_ports[0].external
         }
       ]
       logConfiguration = {

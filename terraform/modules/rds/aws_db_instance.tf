@@ -1,6 +1,6 @@
 variable "db_sbg_name" {}
 variable "sg_rds_sg_id" {}
-
+variable "db_ports" {}
 
 resource "aws_db_instance" "db-setting" {
   engine         = "mysql"
@@ -24,7 +24,7 @@ resource "aws_db_instance" "db-setting" {
   db_subnet_group_name   = var.db_sbg_name
   vpc_security_group_ids = ["${var.sg_rds_sg_id}"]
   publicly_accessible    = false
-  port                   = 3306
+  port                   = var.db_ports[0].external
 
   parameter_group_name = aws_db_parameter_group.db-pg.name
   option_group_name    = aws_db_option_group.main_optiongroup.name

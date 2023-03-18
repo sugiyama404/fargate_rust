@@ -77,6 +77,7 @@ module "rds" {
   source       = "./modules/rds"
   db_sbg_name  = module.network.db_sbg_name
   sg_rds_sg_id = module.network.sg_rds_sg_id
+  db_ports     = var.db_ports
 }
 
 # ECS
