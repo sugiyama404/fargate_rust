@@ -19,12 +19,6 @@ resource "aws_security_group" "webserver_sg" {
   vpc_id = aws_vpc.vpc.id
 }
 
-# SecurityGroup for opmng
-resource "aws_security_group" "opmng_sg" {
-  name   = "${var.app_name}-opmng-sg"
-  vpc_id = aws_vpc.vpc.id
-}
-
 # SecurityGroup for RDS
 resource "aws_security_group" "rds_sg" {
   name   = "rds-sg"

@@ -34,10 +34,9 @@ module "network" {
   api_app_name = var.api_app_name
   http_ports   = var.http_ports
   https_ports  = var.https_ports
-  ssh_ports    = var.ssh_ports
   web_ports    = var.web_ports
   api_ports    = var.api_ports
-  db_ports     = var.db_portsdb_ports
+  db_ports     = var.db_ports
 }
 
 # elb
@@ -78,16 +77,6 @@ module "rds" {
   source       = "./modules/rds"
   db_sbg_name  = module.network.db_sbg_name
   sg_rds_sg_id = module.network.sg_rds_sg_id
-}
-
-# opmng
-module "opmng" {
-  source         = "./modules/ec2"
-  app_name       = var.app_name
-  apserver_sg_id = module.network.apserver_sg_id
-  subnet_p1a_id  = module.network.subnet_public_1a_id
-  opmng_sg_id    = module.network.opmng_sg_id
-  aws_ami_app_id = data.aws_ami.app.id
 }
 
 # ECS

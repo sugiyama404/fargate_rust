@@ -64,21 +64,6 @@ variable "https_ports" {
   ]
 }
 
-variable "ssh_ports" {
-  type = list(object({
-    internal = number
-    external = number
-    protocol = string
-  }))
-  default = [
-    {
-      internal = 22
-      external = 22
-      protocol = "tcp"
-    }
-  ]
-}
-
 variable "web_ports" {
   type = list(object({
     internal = number

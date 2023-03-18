@@ -22,10 +22,6 @@ output "subnet_public_1c_id" {
   value = aws_subnet.public_subnet_1c.id
 }
 
-output "opmng_sg_id" {
-  value = aws_security_group.opmng_sg.id
-}
-
 output "db_sbg_name" {
   value = aws_db_subnet_group.db-sg.name
 }

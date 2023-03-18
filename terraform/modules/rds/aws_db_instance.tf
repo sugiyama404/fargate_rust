@@ -27,7 +27,7 @@ resource "aws_db_instance" "db-setting" {
   port                   = 3306
 
   parameter_group_name = aws_db_parameter_group.db-pg.name
-  option_group_name    = aws_db_option_group.mysql_standalone_optiongroup.name
+  option_group_name    = aws_db_option_group.main_optiongroup.name
 
   backup_window              = "04:00-05:00"
   backup_retention_period    = 7
