@@ -39,6 +39,11 @@ module "network" {
   db_ports     = var.db_ports
 }
 
+# s3
+module "s3" {
+  source = "./modules/s3"
+}
+
 # elb
 module "elb" {
   source        = "./modules/elb"
@@ -49,6 +54,7 @@ module "elb" {
   subnet_p1a_id = module.network.subnet_public_1a_id
   subnet_p1c_id = module.network.subnet_public_1c_id
   alb_sg_id     = module.network.alb_sg_id
+  s3_bucket_id  = module.s3.s3_bucket_id
   #webserver_sg_id = module.network.webserver_sg_id
   #apserver_sg_id = module.network.apserver_sg_id
 }
