@@ -6,14 +6,14 @@ variable "web_app_name" {}
 variable "api_app_name" {}
 variable "api_alb_target_group_arn" {}
 variable "web_alb_target_group_arn" {}
-#variable "lb_listener_rule_api" {}
-#variable "lb_listener_rule_web" {}
+variable "lb_listener_rule_api" {}
+variable "lb_listener_rule_web" {}
 
 # EcsService for Fargate api
 resource "aws_ecs_service" "api-service" {
-  name    = "${var.api_app_name}-service"
-  cluster = aws_ecs_cluster.cluster.id
-  #depends_on      = ["${var.lb_listener_rule_api}"]
+  name            = "${var.api_app_name}-service"
+  cluster         = aws_ecs_cluster.cluster.id
+  depends_on      = ["${var.lb_listener_rule_api}"]
   task_definition = aws_ecs_task_definition.api-definition.arn
   desired_count   = 1
   # ecs exec
@@ -36,9 +36,9 @@ resource "aws_ecs_service" "api-service" {
 
 # EcsService for Fargate web
 resource "aws_ecs_service" "web-service" {
-  name    = "${var.web_app_name}-service"
-  cluster = aws_ecs_cluster.cluster.id
-  #depends_on      = ["${var.lb_listener_rule_web}"]
+  name            = "${var.web_app_name}-service"
+  cluster         = aws_ecs_cluster.cluster.id
+  depends_on      = ["${var.lb_listener_rule_web}"]
   task_definition = aws_ecs_task_definition.web-definition.arn
   desired_count   = 1
 

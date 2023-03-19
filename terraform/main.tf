@@ -106,6 +106,6 @@ module "ecs" {
   web_alb_target_group_arn = module.elb.web_alb_target_group_arn
   web_ports                = var.web_ports
   api_ports                = var.api_ports
-  #lb_listener_rule_api     = module.elb.lb_listener_rule_api
-  #lb_listener_rule_web     = module.elb.lb_listener_rule_web
+  lb_listener_rule_api     = module.elb.lb_listener_rule_api
+  lb_listener_rule_web     = module.elb.lb_listener_rule_web
 }
