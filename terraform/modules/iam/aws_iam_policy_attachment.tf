@@ -15,9 +15,3 @@ resource "aws_iam_policy_attachment" "ecs_task_role_attach" {
   roles      = ["${aws_iam_role.main_role.name}"]
   policy_arn = aws_iam_policy.ecs_task_role_policy.arn
 }
-
-#resource "aws_iam_policy_attachment" "s3_attach" {
-#  name       = "${var.app_name}_s3_attach"
-#  roles      = ["${aws_iam_role.main_role.name}"]
-#  policy_arn = aws_iam_policy.s3_policy.arn
-#}

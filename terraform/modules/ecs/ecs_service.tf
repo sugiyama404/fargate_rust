@@ -29,7 +29,7 @@ resource "aws_ecs_service" "api-service" {
   load_balancer {
     target_group_arn = var.api_alb_target_group_arn
     container_name   = var.api_app_name
-    container_port   = 8080
+    container_port   = var.api_ports[0].internal
   }
 
 }
@@ -45,7 +45,7 @@ resource "aws_ecs_service" "web-service" {
   load_balancer {
     target_group_arn = var.web_alb_target_group_arn
     container_name   = var.web_app_name
-    container_port   = 3000
+    container_port   = var.web_ports[0].internal
   }
 
   network_configuration {

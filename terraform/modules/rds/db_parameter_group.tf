@@ -1,5 +1,7 @@
+variable "app_name" {}
+
 resource "aws_db_parameter_group" "db-pg" {
-  name   = "db-pg"
+  name   = "${var.app_name}-db-pg"
   family = "mysql8.0"
 
   parameter {

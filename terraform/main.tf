@@ -39,12 +39,6 @@ module "network" {
   db_ports     = var.db_ports
 }
 
-# s3
-#module "s3" {
-#  source = "./modules/s3"
-#aws_iam_role = module.iam.aws_iam_role
-#}
-
 # elb
 module "elb" {
   source        = "./modules/elb"
@@ -55,9 +49,8 @@ module "elb" {
   subnet_p1a_id = module.network.subnet_public_1a_id
   subnet_p1c_id = module.network.subnet_public_1c_id
   alb_sg_id     = module.network.alb_sg_id
-  #s3_bucket_id  = module.s3.s3_bucket_id
-  #webserver_sg_id = module.network.webserver_sg_id
-  #apserver_sg_id = module.network.apserver_sg_id
+  web_ports     = var.web_ports
+  api_ports     = var.api_ports
 }
 
 # ECR
@@ -85,6 +78,7 @@ module "rds" {
   db_sbg_name  = module.network.db_sbg_name
   sg_rds_sg_id = module.network.sg_rds_sg_id
   db_ports     = var.db_ports
+  app_name     = var.app_name
 }
 
 # ECS
@@ -108,6 +102,4 @@ module "ecs" {
   web_ports                = var.web_ports
   api_ports                = var.api_ports
   http_arn                 = module.elb.http_arn
-  #lb_listener_rule_api     = module.elb.lb_listener_rule_api
-  #lb_listener_rule_web     = module.elb.lb_listener_rule_web
 }
