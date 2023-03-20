@@ -1,4 +1,5 @@
-data "aws_caller_identity" "self" {}
+#variable "aws_iam_role" {}
+#data "aws_elb_service_account" "main" {}
 
 resource "aws_s3_bucket_policy" "alb_access_log" {
   bucket = aws_s3_bucket.alb_access_log.id
@@ -11,8 +12,10 @@ data "aws_iam_policy_document" "alb_access_log" {
     actions   = ["s3:GetObject"]
     resources = ["${aws_s3_bucket.alb_access_log.arn}/*"]
     principals {
-      type        = "*"
-      identifiers = ["${data.aws_caller_identity.self.account_id}"]
+      type        = "AWS"
+      identifiers = ["*"]
+      #identifiers = ["${var.aws_iam_role}"]
+      #identifiers = ["arn:aws:iam::582318560864:root"]
     }
   }
 }

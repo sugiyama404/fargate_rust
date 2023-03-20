@@ -1,10 +1,14 @@
+variable "http_arn" {}
+variable "api_alb_target_group_arn" {}
+variable "web_alb_target_group_arn" {}
+
 # LbListenerRule for api
 resource "aws_lb_listener_rule" "api-ecs" {
-  listener_arn = aws_lb_listener.http.arn
+  listener_arn = var.http_arn
   priority     = 100
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.api_alb_target_group.arn
+    target_group_arn = var.api_alb_target_group_arn
   }
   condition {
     path_pattern {
@@ -15,11 +19,11 @@ resource "aws_lb_listener_rule" "api-ecs" {
 
 # LbListenerRule for web
 resource "aws_lb_listener_rule" "web-ecs" {
-  listener_arn = aws_lb_listener.http.arn
+  listener_arn = var.http_arn
   priority     = 80
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.web_alb_target_group.arn
+    target_group_arn = var.web_alb_target_group_arn
   }
   condition {
     path_pattern {

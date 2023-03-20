@@ -40,9 +40,10 @@ module "network" {
 }
 
 # s3
-module "s3" {
-  source = "./modules/s3"
-}
+#module "s3" {
+#  source = "./modules/s3"
+#aws_iam_role = module.iam.aws_iam_role
+#}
 
 # elb
 module "elb" {
@@ -54,7 +55,7 @@ module "elb" {
   subnet_p1a_id = module.network.subnet_public_1a_id
   subnet_p1c_id = module.network.subnet_public_1c_id
   alb_sg_id     = module.network.alb_sg_id
-  s3_bucket_id  = module.s3.s3_bucket_id
+  #s3_bucket_id  = module.s3.s3_bucket_id
   #webserver_sg_id = module.network.webserver_sg_id
   #apserver_sg_id = module.network.apserver_sg_id
 }
@@ -106,6 +107,7 @@ module "ecs" {
   web_alb_target_group_arn = module.elb.web_alb_target_group_arn
   web_ports                = var.web_ports
   api_ports                = var.api_ports
-  lb_listener_rule_api     = module.elb.lb_listener_rule_api
-  lb_listener_rule_web     = module.elb.lb_listener_rule_web
+  http_arn                 = module.elb.http_arn
+  #lb_listener_rule_api     = module.elb.lb_listener_rule_api
+  #lb_listener_rule_web     = module.elb.lb_listener_rule_web
 }
