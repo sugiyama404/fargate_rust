@@ -39,6 +39,11 @@ module "network" {
   db_ports     = var.db_ports
 }
 
+# s3
+module "s3" {
+  source = "./modules/s3"
+}
+
 # elb
 module "elb" {
   source        = "./modules/elb"
@@ -51,6 +56,7 @@ module "elb" {
   alb_sg_id     = module.network.alb_sg_id
   web_ports     = var.web_ports
   api_ports     = var.api_ports
+  s3_bucket_id  = module.s3.s3_bucket_id
 }
 
 # ECR

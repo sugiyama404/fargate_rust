@@ -1,4 +1,4 @@
-variable "app_name" {}
+#variable "app_name" {}
 
 resource "aws_db_parameter_group" "db-pg" {
   name   = "${var.app_name}-db-pg"
