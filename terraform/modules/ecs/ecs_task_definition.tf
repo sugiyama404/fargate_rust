@@ -1,13 +1,9 @@
 variable "aws_iam_role" {}
-#variable "web_app_name" {}
-#variable "api_app_name" {}
 variable "db_endpoint" {}
 variable "db_instance_name" {}
 variable "db_name" {}
 variable "db_username" {}
 variable "db_password" {}
-#variable "api_repository_url" {}
-#variable "web_repository_url" {}
 variable "web_ports" {}
 variable "api_ports" {}
 
@@ -15,7 +11,7 @@ data "aws_caller_identity" "self" {}
 
 # TaskDefinition for Fargate api
 resource "aws_ecs_task_definition" "api-definition" {
-  family                   = "${var.app_name}-definition"
+  family                   = "${var.api_app_name}-definition"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 256
   memory                   = 512
@@ -72,7 +68,7 @@ resource "aws_ecs_task_definition" "api-definition" {
 
 # TaskDefinition for Fargate web
 resource "aws_ecs_task_definition" "web-definition" {
-  family                   = "${var.app_name}-definition"
+  family                   = "${var.web_app_name}-definition"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 256
   memory                   = 512
