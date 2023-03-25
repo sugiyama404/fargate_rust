@@ -108,7 +108,7 @@ jobs:
         with:
           task-definition: ${{ steps.api-task-def.outputs.task-definition }}
           service: ${{ env.API_ECS_SERVICE }}
-          cluster: ${{ env.API_ECS_CLUSTER }}
+          cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
 
       - name: Deploy Amazon ECS web task definition
@@ -116,5 +116,5 @@ jobs:
         with:
           task-definition: ${{ steps.web-task-def.outputs.task-definition }}
           service: ${{ env.WEB_ECS_SERVICE }}
-          cluster: ${{ env.WEB_ECS_CLUSTER }}
+          cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
