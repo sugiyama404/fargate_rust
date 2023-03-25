@@ -4,10 +4,6 @@ variable "webserver_sg_id" {}
 variable "subnet_p1c_id" {}
 variable "web_app_name" {}
 variable "api_app_name" {}
-#variable "api_alb_target_group_arn" {}
-#variable "web_alb_target_group_arn" {}
-#variable "lb_listener_rule_api" {}
-#variable "lb_listener_rule_web" {}
 
 # EcsService for Fargate api
 resource "aws_ecs_service" "api-service" {
